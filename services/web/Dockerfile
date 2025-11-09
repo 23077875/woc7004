@@ -2,7 +2,7 @@
 FROM python:3.13-slim-bookworm
 
 # set work directory
-WORKDIR /usr/local/bin
+WORKDIR /usr/src/app
 
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
@@ -13,18 +13,18 @@ RUN apt update && apt install -y netcat-traditional dos2unix
 
 # install dependencies
 RUN pip install --upgrade pip
-COPY ./requirements.txt /usr/local/bin/requirements.txt
+COPY ./requirements.txt /usr/src/app/requirements.txt
 RUN pip install -r requirements.txt
 
 # copy project
-COPY . /usr/local/bin/
+COPY . /usr/src/app/
 
-# Make sure /usr/local/bin/entrypoint.sh is executable and dos2unix
-RUN chmod +x /usr/local/bin/entrypoint.sh
-RUN dos2unix /usr/local/bin/entrypoint.sh
+# Make sure /usr/src/app/entrypoint.sh is executable and dos2unix
+RUN chmod +x /usr/src/app/entrypoint.sh
+RUN dos2unix /usr/src/app/entrypoint.sh
 
 ENV FLASK_APP=project/__init__.py
 
 # run entrypoint.sh
 ENV FLASK_APP=project.wsgi
-ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
+ENTRYPOINT ["/usr/src/app/entrypoint.sh"]

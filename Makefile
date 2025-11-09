@@ -13,9 +13,7 @@ endif
 # Full first-time setup (build + up + migrate)
 setup:
 	$(COMPOSE_CMD) -f $(COMPOSE_FILE) down -v
-	cp -rf codecarbon ./services/web/codecarbon
 	$(COMPOSE_CMD) -f $(COMPOSE_FILE) up -d --build
-	rm -rf ./services/web/codecarbon
 
 	$(COMPOSE_CMD) exec web flask db downgrade base
 	$(COMPOSE_CMD) exec web flask db upgrade
