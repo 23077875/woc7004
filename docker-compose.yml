@@ -32,6 +32,20 @@ services:
       - ./k6:/scripts
       - ./k6/results:/results
 
+  k6_db:
+    image: grafana/k6:latest
+    entrypoint: ["k6", "run", "/scripts/performance-db.js"]
+    volumes:
+      - ./k6:/scripts
+      - ./k6/results:/results
+
+  k6_redis:
+    image: grafana/k6:latest
+    entrypoint: ["k6", "run", "/scripts/performance-redis.js"]
+    volumes:
+      - ./k6:/scripts
+      - ./k6/results:/results
+
 volumes:
   postgres_data:
   redis_data:
