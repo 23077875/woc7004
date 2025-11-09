@@ -7,7 +7,7 @@ let reqsDB = new Counter("db_reqs");
 let latDB = new Trend("db_latency", true);
 
 // Configuration
-const NUM_FIXED_URLS = 50000;
+const NUM_FIXED_URLS = 5000;
 const BASE_URL = "http://web:8080/api/links";
 const AUTH_HEADER = {
   headers: { Authorization: "CHANGEME", "Content-Type": "application/json" },
@@ -22,8 +22,8 @@ export let options = {
   scenarios: {
     db_only: {
       executor: "per-vu-iterations",
-      vus: 10,
-      iterations: 5000,
+      vus: 5,
+      iterations: 1000,
       exec: "dbOnly",
     },
   },
