@@ -2,14 +2,16 @@ services:
   web:
     build: ./services/web
     volumes:
-      - ./services/web/:/usr/src/app/
+      - ./services/web:/usr/src/app
       - ./codecarbon:/usr/src/app/codecarbon
+      - ./k6/results:/usr/src/app/k6/results
     ports:
       - "8080:5000"
     env_file:
       - ./.env
     depends_on:
       - db
+      - redis
 
   db:
     image: postgres:13-alpine

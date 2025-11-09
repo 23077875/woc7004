@@ -4,6 +4,8 @@ FROM python:3.13-slim-bookworm
 # set work directory
 WORKDIR /usr/src/app
 
+RUN mkdir -p /usr/src/app/k6/results
+
 # set environment variables
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
